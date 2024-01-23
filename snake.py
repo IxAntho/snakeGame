@@ -2,6 +2,8 @@ from turtle import Turtle
 
 STARTING_POSITIONS = [(0, 0), (-20, 0), (-40, 0)]
 MOVE_DISTANCE = 20
+
+
 # Here we declare all these constants because if we want to
 # change something related to them, we must look at the top of our code
 # instead looking through our entire code
@@ -13,13 +15,19 @@ class Snake:
         self.create_snake()
 
     def create_snake(self):
-        # Creating three segments and using tuples to position them in the right way
         for position in STARTING_POSITIONS:
-            snake = Turtle(shape="square")
-            snake.color("white")
-            snake.penup()
-            snake.goto(position)
-            self.segments.append(snake)
+            self.add_segment(position)
+
+    def add_segment(self, position):
+        # Creating segments and using tuples to position them in the right way
+        snake = Turtle(shape="square")
+        snake.color("white")
+        snake.penup()
+        snake.goto(position)
+        self.segments.append(snake)
+
+    def extend(self):
+        self.add_segment(self.segments[-1].position())
 
     def move(self):
         # change the way our snake moves, now it moves from the last square to the first one
@@ -52,4 +60,3 @@ class Snake:
             self.segments[0].right(90)
         elif self.segments[0].heading() == 270:
             self.segments[0].left(90)
-
